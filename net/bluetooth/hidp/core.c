@@ -291,7 +291,6 @@ static int hidp_send_report(struct hidp_session *session, struct hid_report *rep
 	if (rsize > sizeof(buf))
 		return -EIO;
 
-	skb_queue_tail(&session->ctrl_transmit, skb);
 	hid_output_report(report, buf);
 	hdr = HIDP_TRANS_DATA | HIDP_DATA_RTYPE_OUPUT;
 
@@ -467,7 +466,7 @@ static void hidp_recv_ctrl_frame(struct hidp_session *session,
 		break;
 
 	default:
-		__hidp_send_ctrl_message(session,
+		hidp_send_ctrl_message(session,
 			HIDP_TRANS_HANDSHAKE | HIDP_HSHK_ERR_UNSUPPORTED_REQUEST, NULL, 0);
 		break;
 	}
