@@ -236,7 +236,6 @@ struct android_configuration {
 
 struct dload_struct __iomem *diag_dload;
 static struct class *android_class;
-static struct android_dev *_android_dev;
 static struct list_head android_dev_list;
 static int android_dev_count;
 static int android_bind_config(struct usb_configuration *c);
